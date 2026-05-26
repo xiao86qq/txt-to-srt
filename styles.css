@@ -45,11 +45,45 @@ body::before {
   isolation: isolate;
   padding: clamp(20px, 4vw, 64px);
   overflow: hidden;
-  background-color: #0c62d9;
-  background-image: var(--hero-image);
-  background-position: center bottom;
+  background: #07111c;
+}
+
+.hero-backdrop,
+.hero-media {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-backdrop {
+  z-index: 0;
+  background-image:
+    linear-gradient(90deg, rgba(2, 7, 16, 0.5), rgba(2, 7, 16, 0.08) 34%, rgba(2, 7, 16, 0.08) 66%, rgba(2, 7, 16, 0.5)),
+    linear-gradient(180deg, rgba(2, 7, 16, 0.22), rgba(2, 7, 16, 0.38)),
+    var(--hero-image);
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  filter: blur(32px) saturate(115%) brightness(0.82);
+  opacity: 0.96;
+  transform: scale(1.08);
+}
+
+.hero-media {
+  z-index: 0;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.hero-media img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100vw;
+  max-height: 100svh;
+  object-fit: contain;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18), 0 28px 90px rgba(0, 0, 0, 0.28);
 }
 
 .cursor-trail-layer {

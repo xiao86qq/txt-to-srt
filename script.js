@@ -2,6 +2,7 @@
   const root = document.documentElement;
   const body = document.body;
   const hero = document.querySelector(".hero");
+  const heroImage = document.querySelector("#hero-image");
   const card = document.querySelector(".glass-card");
   const audio = document.querySelector("#relax-audio");
   const switchPanel = document.querySelector(".switch-panel");
@@ -157,6 +158,10 @@
 
     backgroundObjectUrl = URL.createObjectURL(file);
     root.style.setProperty("--hero-image", `url("${backgroundObjectUrl}")`);
+
+    if (heroImage) {
+      heroImage.src = backgroundObjectUrl;
+    }
   };
 
   const updateMusic = (file) => {
@@ -201,7 +206,7 @@
     }
 
     if (button.dataset.switch === "daiban") {
-      window.location.href = "file:///E:/My%20Project/daiban/index.html";
+      window.open("file:///E:/My%20Project/daiban/index.html", "_blank", "noopener");
     }
   });
 
