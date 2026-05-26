@@ -26,11 +26,11 @@
     }
 
     const colors = [
-      ["rgba(104, 166, 245, 0.82)", "rgba(104, 166, 245, 0.4)"],
-      ["rgba(166, 132, 226, 0.78)", "rgba(166, 132, 226, 0.36)"],
-      ["rgba(199, 207, 226, 0.7)", "rgba(199, 207, 226, 0.3)"],
-      ["rgba(95, 135, 178, 0.7)", "rgba(95, 135, 178, 0.28)"],
-      ["rgba(220, 82, 96, 0.72)", "rgba(220, 82, 96, 0.3)"]
+      ["rgba(104, 166, 245, 0.88)", "rgba(104, 166, 245, 0.46)"],
+      ["rgba(166, 132, 226, 0.84)", "rgba(166, 132, 226, 0.42)"],
+      ["rgba(199, 207, 226, 0.76)", "rgba(199, 207, 226, 0.36)"],
+      ["rgba(95, 135, 178, 0.76)", "rgba(95, 135, 178, 0.34)"],
+      ["rgba(220, 82, 96, 0.78)", "rgba(220, 82, 96, 0.36)"]
     ];
     const poolSize = 34;
     const particles = Array.from({ length: poolSize }, () => {
@@ -77,11 +77,11 @@
 
       particle.animate([
         {
-          opacity: 0.98,
+          opacity: 1,
           transform: `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) rotate(${rotate * 0.15}deg) scale(1)`
         },
         {
-          opacity: 0.62,
+          opacity: 0.7,
           offset: 0.38,
           transform: `translate3d(${(x + driftX * 0.28).toFixed(2)}px, ${(y + driftY * 0.28).toFixed(2)}px, 0) rotate(${rotate * 0.45}deg) scale(0.92)`
         },
@@ -198,6 +198,10 @@
 
     if (button.dataset.switch === "music") {
       musicInput?.click();
+    }
+
+    if (button.dataset.switch === "daiban") {
+      window.location.href = "file:///E:/My%20Project/daiban/index.html";
     }
   });
 
