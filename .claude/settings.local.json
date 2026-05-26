@@ -27,7 +27,8 @@
       "Bash(node --check \"E:/My Project/daiban/app.js\")",
       "Bash(powershell.exe -NoProfile -Command '$connections = Get-NetTCPConnection -LocalPort 8765 -State Listen -ErrorAction SilentlyContinue; foreach \\($connection in $connections\\) { Get-CimInstance Win32_Process -Filter \"ProcessId=$\\($connection.OwningProcess\\)\" | Select-Object ProcessId,CommandLine | ConvertTo-Json -Compress }')",
       "Bash(powershell.exe -NoProfile -Command 'Stop-Process -Id 34744')",
-      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-trail-tune\" about:blank)"
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-trail-tune\" about:blank)",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-trail-bright-size\" about:blank)"
     ],
     "additionalDirectories": [
       "E:\\My Project\\txt to srt"

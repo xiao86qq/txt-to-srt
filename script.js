@@ -26,11 +26,11 @@
     }
 
     const colors = [
-      ["rgba(118, 158, 224, 0.72)", "rgba(118, 158, 224, 0.3)"],
-      ["rgba(146, 128, 204, 0.68)", "rgba(146, 128, 204, 0.26)"],
-      ["rgba(176, 183, 200, 0.62)", "rgba(176, 183, 200, 0.22)"],
-      ["rgba(88, 111, 140, 0.6)", "rgba(88, 111, 140, 0.2)"],
-      ["rgba(194, 86, 94, 0.6)", "rgba(194, 86, 94, 0.2)"]
+      ["rgba(104, 166, 245, 0.82)", "rgba(104, 166, 245, 0.4)"],
+      ["rgba(166, 132, 226, 0.78)", "rgba(166, 132, 226, 0.36)"],
+      ["rgba(199, 207, 226, 0.7)", "rgba(199, 207, 226, 0.3)"],
+      ["rgba(95, 135, 178, 0.7)", "rgba(95, 135, 178, 0.28)"],
+      ["rgba(220, 82, 96, 0.72)", "rgba(220, 82, 96, 0.3)"]
     ];
     const poolSize = 34;
     const particles = Array.from({ length: poolSize }, () => {
@@ -63,7 +63,7 @@
       particle.getAnimations().forEach((animation) => animation.cancel());
 
       const [color, glow] = chooseColor();
-      const size = 5 + Math.random() * 8;
+      const size = 7 + Math.random() * 9;
       const x = event.clientX - bounds.left + (Math.random() - 0.5) * 14;
       const y = event.clientY - bounds.top + (Math.random() - 0.5) * 14;
       const driftX = (Math.random() - 0.5) * 72;
@@ -77,11 +77,11 @@
 
       particle.animate([
         {
-          opacity: 0.92,
+          opacity: 0.98,
           transform: `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) rotate(${rotate * 0.15}deg) scale(1)`
         },
         {
-          opacity: 0.52,
+          opacity: 0.62,
           offset: 0.38,
           transform: `translate3d(${(x + driftX * 0.28).toFixed(2)}px, ${(y + driftY * 0.28).toFixed(2)}px, 0) rotate(${rotate * 0.45}deg) scale(0.92)`
         },
