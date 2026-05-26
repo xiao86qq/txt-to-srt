@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0c62d9">
+  <title>辛苦了主人，放松片刻吧</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="hero" aria-label="放松片刻">
+    <section class="glass-card" aria-labelledby="page-title" role="button" tabindex="0" aria-label="点击卡片开始放松并播放音乐">
+      <p class="eyebrow">REST MODE</p>
+      <h1 id="page-title">辛苦了主人，放松片刻吧</h1>
+      <div class="divider" aria-hidden="true"></div>
+      <p class="subtitle">把世界调成静音，让这一刻慢慢落下。</p>
+      <div class="breath" aria-hidden="true">
+        <span></span>
+      </div>
+    </section>
+    <p class="corner-note">take a gentle pause</p>
+    <div class="switch-panel" aria-label="媒体调换控制" aria-hidden="true">
+      <button class="switch-button" type="button" data-switch="background" disabled>
+        <span>更换背景</span>
+        <small>IMAGE</small>
+      </button>
+      <button class="switch-button" type="button" data-switch="music" disabled>
+        <span>更换音乐</span>
+        <small>MUSIC</small>
+      </button>
+      <p class="switch-tip">按 R 显示 / 隐藏</p>
+    </div>
+    <input class="visually-hidden" id="background-input" type="file" accept="image/*">
+    <input class="visually-hidden" id="music-input" type="file" accept="audio/*">
+    <audio id="relax-audio" src="./assets/Stay Alive (From The Secret Life of Walter Mitty Soundtrack) - José González.mp3" preload="auto"></audio>
+  </main>
+  <script src="./script.js"></script>
+</body>
+</html>

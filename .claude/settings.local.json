@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.limestart.cn)",
+      "Bash(mkdir -p \"/e/My Project/txt to srt/assets\")",
+      "Bash(python -m http.server 8765 --directory \"/e/My Project/txt to srt\")",
+      "Bash(timeout 30 bash -c 'until curl -sf http://127.0.0.1:8765/ >/dev/null; do sleep 1; done')",
+      "Bash(command -v chromium-cli)",
+      "Bash(curl -I http://127.0.0.1:8765/)",
+      "Bash(command -v node)",
+      "Bash(command -v python)",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless --disable-gpu --hide-scrollbars --window-size=1440,900 --screenshot=\"/e/My Project/txt to srt/preview.png\" http://127.0.0.1:8765/)",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless --disable-gpu --hide-scrollbars --window-size=1440,900 --virtual-time-budget=3000 --screenshot=\"/e/My Project/txt to srt/preview.png\" http://127.0.0.1:8765/)",
+      "Bash(curl -sf http://127.0.0.1:8765/)",
+      "Bash(python -c \"import sys; data=sys.stdin.read\\(\\); print\\('headline ok' if '辛苦了主人，放松片刻吧' in data else 'headline missing'\\)\")",
+      "Bash(curl -sfI http://127.0.0.1:8765/assets/hero-background.png)",
+      "Bash(python -)",
+      "Bash(curl -sfI \"http://127.0.0.1:8765/assets/Stay%20Alive%20%28From%20The%20Secret%20Life%20of%20Walter%20Mitty%20Soundtrack%29%20-%20Jos%C3%A9%20Gonz%C3%A1lez.mp3\")",
+      "Bash(node -e \"try{require.resolve\\('playwright'\\); console.log\\('playwright'\\)}catch\\(e\\){}; try{require.resolve\\('puppeteer'\\); console.log\\('puppeteer'\\)}catch\\(e\\){}\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-relax-page\" http://127.0.0.1:8765/)",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-relax-page-2\" about:blank)",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-switch-controls\" about:blank)"
+    ],
+    "additionalDirectories": [
+      "E:\\My Project\\txt to srt"
+    ]
+  }
+}
