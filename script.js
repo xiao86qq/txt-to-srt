@@ -1,14 +1,14 @@
 (() => {
   const root = document.documentElement;
   const body = document.body;
+  const hero = document.querySelector(".hero");
   const card = document.querySelector(".glass-card");
   const audio = document.querySelector("#relax-audio");
   const switchPanel = document.querySelector(".switch-panel");
   const switchButtons = document.querySelectorAll(".switch-button");
   const backgroundInput = document.querySelector("#background-input");
   const musicInput = document.querySelector("#music-input");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const finePointer = window.matchMedia("(pointer: fine)");
+  const trailLayer = document.querySelector(".cursor-trail-layer");
 
   let backgroundObjectUrl = "";
   let musicObjectUrl = "";
@@ -16,6 +16,92 @@
   window.addEventListener("load", () => {
     body.classList.add("is-loaded");
   }, { once: true });
+
+  const initCursorTrail = () => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const finePointer = window.matchMedia("(pointer: fine)");
+
+    if (!hero || !trailLayer || reduceMotion.matches || !finePointer.matches) {
+      return;
+    }
+
+    const colors = [
+      ["rgba(118, 158, 224, 0.72)", "rgba(118, 158, 224, 0.3)"],
+      ["rgba(146, 128, 204, 0.68)", "rgba(146, 128, 204, 0.26)"],
+      ["rgba(176, 183, 200, 0.62)", "rgba(176, 183, 200, 0.22)"],
+      ["rgba(88, 111, 140, 0.6)", "rgba(88, 111, 140, 0.2)"],
+      ["rgba(194, 86, 94, 0.6)", "rgba(194, 86, 94, 0.2)"]
+    ];
+    const poolSize = 34;
+    const particles = Array.from({ length: poolSize }, () => {
+      const particle = document.createElement("span");
+      particle.className = "cursor-trail-particle";
+      trailLayer.appendChild(particle);
+      return particle;
+    });
+
+    let particleIndex = 0;
+    let lastEmit = 0;
+    let bounds = hero.getBoundingClientRect();
+
+    const refreshBounds = () => {
+      bounds = hero.getBoundingClientRect();
+    };
+
+    const chooseColor = () => colors[Math.floor(Math.random() * colors.length)];
+
+    const emitParticle = (event) => {
+      const now = performance.now();
+
+      if (now - lastEmit < 42 || (event.pointerType && event.pointerType !== "mouse")) {
+        return;
+      }
+
+      lastEmit = now;
+      const particle = particles[particleIndex];
+      particleIndex = (particleIndex + 1) % particles.length;
+      particle.getAnimations().forEach((animation) => animation.cancel());
+
+      const [color, glow] = chooseColor();
+      const size = 5 + Math.random() * 8;
+      const x = event.clientX - bounds.left + (Math.random() - 0.5) * 14;
+      const y = event.clientY - bounds.top + (Math.random() - 0.5) * 14;
+      const driftX = (Math.random() - 0.5) * 72;
+      const driftY = 22 + Math.random() * 54;
+      const rotate = (Math.random() - 0.5) * 180;
+      const duration = 540 + Math.random() * 360;
+
+      particle.style.setProperty("--trail-size", `${size.toFixed(2)}px`);
+      particle.style.setProperty("--trail-color", color);
+      particle.style.setProperty("--trail-glow", glow);
+
+      particle.animate([
+        {
+          opacity: 0.92,
+          transform: `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) rotate(${rotate * 0.15}deg) scale(1)`
+        },
+        {
+          opacity: 0.52,
+          offset: 0.38,
+          transform: `translate3d(${(x + driftX * 0.28).toFixed(2)}px, ${(y + driftY * 0.28).toFixed(2)}px, 0) rotate(${rotate * 0.45}deg) scale(0.92)`
+        },
+        {
+          opacity: 0,
+          transform: `translate3d(${(x + driftX).toFixed(2)}px, ${(y + driftY).toFixed(2)}px, 0) rotate(${rotate}deg) scale(0.34)`
+        }
+      ], {
+        duration,
+        easing: "cubic-bezier(.2, .7, .2, 1)",
+        fill: "forwards"
+      });
+    };
+
+    hero.addEventListener("pointerenter", refreshBounds, { passive: true });
+    hero.addEventListener("pointermove", emitParticle, { passive: true });
+    window.addEventListener("resize", refreshBounds, { passive: true });
+  };
+
+  initCursorTrail();
 
   const enableSwitchPanel = () => {
     body.classList.add("is-relaxing", "controls-visible");
@@ -138,32 +224,4 @@
     }
   });
 
-  if (reduceMotion.matches || !finePointer.matches) {
-    return;
-  }
-
-  let rafId = 0;
-  let nextX = 0;
-  let nextY = 0;
-
-  const update = () => {
-    rafId = 0;
-    root.style.setProperty("--mx", nextX.toFixed(3));
-    root.style.setProperty("--my", nextY.toFixed(3));
-    root.style.setProperty("--card-x", `${(nextX * 8).toFixed(2)}px`);
-    root.style.setProperty("--card-y", `${(nextY * 8).toFixed(2)}px`);
-    root.style.setProperty("--glow-x", `${50 + nextX * 8}%`);
-    root.style.setProperty("--glow-y", `${42 + nextY * 8}%`);
-  };
-
-  window.addEventListener("pointermove", (event) => {
-    const width = window.innerWidth || 1;
-    const height = window.innerHeight || 1;
-    nextX = (event.clientX / width - 0.5) * 2;
-    nextY = (event.clientY / height - 0.5) * 2;
-
-    if (!rafId) {
-      rafId = window.requestAnimationFrame(update);
-    }
-  }, { passive: true });
 })();

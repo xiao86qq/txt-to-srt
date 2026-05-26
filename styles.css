@@ -1,11 +1,5 @@
 :root {
   color-scheme: dark;
-  --mx: 0;
-  --my: 0;
-  --card-x: 0px;
-  --card-y: 0px;
-  --glow-x: 50%;
-  --glow-y: 42%;
   --ink: rgba(255, 255, 255, 0.96);
   --muted: rgba(255, 255, 255, 0.72);
   --line: rgba(255, 255, 255, 0.28);
@@ -51,37 +45,35 @@ body::before {
   isolation: isolate;
   padding: clamp(20px, 4vw, 64px);
   overflow: hidden;
-  background:
-    radial-gradient(circle at calc(18% + (var(--mx) * 3%)) calc(18% + (var(--my) * 3%)), rgba(144, 204, 255, 0.42), transparent 34%),
-    radial-gradient(circle at calc(82% - (var(--mx) * 4%)) calc(74% - (var(--my) * 3%)), rgba(255, 204, 184, 0.34), transparent 38%),
-    linear-gradient(110deg, rgba(7, 19, 48, 0.54), rgba(12, 72, 171, 0.08) 48%, rgba(4, 8, 24, 0.58)),
-    linear-gradient(180deg, rgba(8, 18, 48, 0.04), rgba(2, 6, 20, 0.58)),
-    var(--hero-image) center bottom / cover no-repeat,
-    linear-gradient(135deg, #4db3ff 0%, #1263df 48%, #83c7ff 100%);
+  background-color: #0c62d9;
+  background-image: var(--hero-image);
+  background-position: center bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.hero::before,
-.hero::after {
+.cursor-trail-layer {
   position: absolute;
-  inset: -12%;
-  z-index: -1;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
   pointer-events: none;
-  content: "";
+  contain: layout paint;
 }
 
-.hero::before {
-  background:
-    radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(255, 255, 255, 0.22), transparent 20%),
-    radial-gradient(circle at 45% 82%, rgba(90, 169, 255, 0.26), transparent 42%);
-  filter: blur(22px);
-  transform: translate3d(calc(var(--mx) * -8px), calc(var(--my) * -8px), 0) scale(1.04);
-  animation: ambientFloat 18s ease-in-out infinite alternate;
-}
-
-.hero::after {
-  background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.42), transparent 28%, transparent 70%, rgba(0, 0, 0, 0.34)),
-    radial-gradient(ellipse at center, transparent 42%, rgba(0, 4, 18, 0.42) 100%);
+.cursor-trail-particle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--trail-size, 8px);
+  height: var(--trail-size, 8px);
+  border-radius: 2px;
+  background: var(--trail-color, rgba(130, 155, 205, 0.58));
+  box-shadow: 0 0 18px var(--trail-glow, rgba(130, 155, 205, 0.18));
+  opacity: 0;
+  transform: translate3d(-999px, -999px, 0) rotate(0deg) scale(1);
+  will-change: transform, opacity;
+  mix-blend-mode: screen;
 }
 
 .glass-card {
@@ -103,7 +95,7 @@ body::before {
     inset 0 -1px 0 rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(26px) saturate(138%);
   -webkit-backdrop-filter: blur(26px) saturate(138%);
-  transform: translate3d(var(--card-x), calc(18px + var(--card-y)), 0) scale(0.985);
+  transform: translate3d(0, 18px, 0) scale(0.985);
   opacity: 0;
   cursor: pointer;
   animation: cardReveal 1200ms 240ms cubic-bezier(.16, 1, .3, 1) forwards;
@@ -328,12 +320,12 @@ body.is-relaxing.controls-visible .switch-panel {
   0% {
     opacity: 0;
     filter: blur(12px);
-    transform: translate3d(var(--card-x), calc(34px + var(--card-y)), 0) scale(0.965);
+    transform: translate3d(0, 34px, 0) scale(0.965);
   }
   100% {
     opacity: 1;
     filter: blur(0);
-    transform: translate3d(var(--card-x), var(--card-y), 0) scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
   }
 }
 
@@ -341,25 +333,15 @@ body.is-relaxing.controls-visible .switch-panel {
   0% {
     opacity: 1;
     filter: blur(0);
-    transform: translate3d(var(--card-x), var(--card-y), 0) scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
   }
   100% {
     opacity: 0;
     filter: blur(16px);
-    transform: translate3d(var(--card-x), calc(var(--card-y) + 28px), 0) scale(0.94);
+    transform: translate3d(0, 28px, 0) scale(0.94);
   }
 }
 
-@keyframes ambientFloat {
-  0% {
-    opacity: 0.66;
-    transform: translate3d(calc(var(--mx) * -8px), calc(var(--my) * -8px), 0) scale(1.02) rotate(0deg);
-  }
-  100% {
-    opacity: 0.98;
-    transform: translate3d(calc(var(--mx) * 10px), calc(var(--my) * 10px), 0) scale(1.08) rotate(2deg);
-  }
-}
 
 @keyframes pulse {
   0%, 100% {
@@ -432,6 +414,16 @@ body.is-relaxing.controls-visible .switch-panel {
 
   .glass-card.is-dismissed {
     opacity: 0 !important;
+  }
+
+  .cursor-trail-layer {
+    display: none;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor-trail-layer {
+    display: none;
   }
 }
 
