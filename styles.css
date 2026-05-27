@@ -86,6 +86,19 @@ body::before {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18), 0 28px 90px rgba(0, 0, 0, 0.28);
 }
 
+.hero.is-widescreen-image .hero-backdrop {
+  opacity: 0;
+}
+
+.hero.is-widescreen-image .hero-media img {
+  width: 100vw;
+  height: 100svh;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  box-shadow: none;
+}
+
 .cursor-trail-layer {
   position: absolute;
   inset: 0;

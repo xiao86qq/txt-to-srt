@@ -18,6 +18,21 @@
     body.classList.add("is-loaded");
   }, { once: true });
 
+  const updateImageLayout = () => {
+    if (!hero || !heroImage?.naturalWidth || !heroImage?.naturalHeight) {
+      return;
+    }
+
+    const ratio = heroImage.naturalWidth / heroImage.naturalHeight;
+    hero.classList.toggle("is-widescreen-image", Math.abs(ratio - 16 / 9) < 0.03);
+  };
+
+  heroImage?.addEventListener("load", updateImageLayout);
+
+  if (heroImage?.complete) {
+    updateImageLayout();
+  }
+
   const initCursorTrail = () => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const finePointer = window.matchMedia("(pointer: fine)");

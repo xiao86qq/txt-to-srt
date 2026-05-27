@@ -30,7 +30,8 @@
       "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-trail-tune\" about:blank)",
       "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-trail-bright-size\" about:blank)",
       "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-daiban-nav\" about:blank)",
-      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-adaptive-bg-newtab\" about:blank)"
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-adaptive-bg-newtab\" about:blank)",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-widescreen-bg\" about:blank)"
     ],
     "additionalDirectories": [
       "E:\\My Project\\txt to srt"
