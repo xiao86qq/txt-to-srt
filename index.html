@@ -11,7 +11,7 @@
   <main class="hero" aria-label="放松片刻">
     <div class="hero-backdrop" aria-hidden="true"></div>
     <div class="hero-media" aria-hidden="true">
-      <img id="hero-image" src="./assets/hero-background.png" alt="">
+      <img id="hero-image" src="./assets/picture/hero-background.png" alt="">
     </div>
     <div class="cursor-trail-layer" aria-hidden="true"></div>
     <section class="glass-card" aria-labelledby="page-title" role="button" tabindex="0" aria-label="点击卡片开始放松并播放音乐">
@@ -39,10 +39,75 @@
       </button>
       <p class="switch-tip">按 R 显示 / 隐藏</p>
     </div>
+    <div class="media-modal background-modal" id="background-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="background-modal-title">
+      <button class="media-modal__scrim" type="button" data-close="background" aria-label="关闭背景选择"></button>
+      <section class="media-modal__panel" tabindex="-1">
+        <header class="modal-header">
+          <div>
+            <p class="modal-kicker">WALLPAPER</p>
+            <h2 id="background-modal-title">壁纸偏好</h2>
+            <p class="modal-subtitle">从本地图片库中选择背景，或让每次打开网页时随机挑选。</p>
+          </div>
+          <button class="modal-close" type="button" data-close="background" aria-label="关闭背景选择">×</button>
+        </header>
+        <div class="modal-toolbar">
+          <button class="modal-action" id="set-default-background" type="button">设为默认</button>
+          <button class="modal-action" id="restore-default-background" type="button">恢复默认</button>
+          <button class="media-toggle" id="random-background-toggle" type="button" aria-pressed="false">
+            <span></span>
+            每次随机
+          </button>
+        </div>
+        <div class="background-grid" id="background-grid" aria-label="背景图片列表"></div>
+        <p class="modal-status" id="background-current">当前背景：默认</p>
+      </section>
+    </div>
+
+    <aside class="music-drawer" id="music-drawer" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="music-drawer-title">
+      <button class="music-drawer__scrim" type="button" data-close="music" aria-label="关闭音乐库"></button>
+      <section class="music-drawer__panel" tabindex="-1">
+        <header class="drawer-header">
+          <div>
+            <p class="modal-kicker">MUSIC</p>
+            <h2 id="music-drawer-title">歌曲侧栏</h2>
+            <p class="modal-subtitle">按 P 显示 / 隐藏，搜索并切换本地歌曲。</p>
+          </div>
+          <button class="modal-close" type="button" data-close="music" aria-label="关闭音乐库">×</button>
+        </header>
+        <label class="song-search">
+          <span>搜索歌曲</span>
+          <input id="song-search" type="search" placeholder="输入歌名或歌手..." autocomplete="off">
+        </label>
+        <div class="song-list" id="song-list" role="listbox" aria-label="歌曲列表"></div>
+        <div class="now-playing" aria-live="polite">
+          <p class="now-playing__label">NOW PLAYING</p>
+          <h3 id="now-playing-title">未选择歌曲</h3>
+          <p id="now-playing-meta">从歌曲列表中选择一首歌</p>
+        </div>
+        <div class="audio-progress" aria-label="播放进度">
+          <span id="audio-current-time">0:00</span>
+          <input id="audio-progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="音频播放进度">
+          <span id="audio-duration">0:00</span>
+        </div>
+        <div class="player-controls" aria-label="音乐播放控制">
+          <button class="player-button" id="prev-song" type="button" aria-label="上一首">‹</button>
+          <button class="player-button player-button--primary" id="play-toggle" type="button" aria-label="播放或暂停">播放</button>
+          <button class="player-button" id="next-song" type="button" aria-label="下一首">›</button>
+          <button class="player-button repeat-toggle" id="repeat-toggle" type="button" aria-pressed="true">单曲</button>
+        </div>
+        <label class="volume-control">
+          <span>音量</span>
+          <input id="volume-slider" type="range" min="0" max="100" value="82">
+          <strong id="volume-value">82%</strong>
+        </label>
+      </section>
+    </aside>
+
     <input class="visually-hidden" id="background-input" type="file" accept="image/*">
     <input class="visually-hidden" id="music-input" type="file" accept="audio/*">
-    <audio id="relax-audio" src="./assets/Stay Alive (From The Secret Life of Walter Mitty Soundtrack) - José González.mp3" preload="auto"></audio>
+    <audio id="relax-audio" src="./assets/song/Stay Alive (From The Secret Life of Walter Mitty Soundtrack) - José González.mp3" preload="auto"></audio>
   </main>
+  <script src="./assets/media-manifest.js"></script>
   <script src="./script.js"></script>
 </body>
 </html>

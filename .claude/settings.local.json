@@ -31,7 +31,14 @@
       "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-trail-bright-size\" about:blank)",
       "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-daiban-nav\" about:blank)",
       "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-adaptive-bg-newtab\" about:blank)",
-      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-widescreen-bg\" about:blank)"
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-widescreen-bg\" about:blank)",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9222 --user-data-dir=\"/tmp/edge-media-modals\" about:blank)",
+      "Bash(node --check \"/e/My Project/txt to srt/script.js\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9223 --user-data-dir=\"/tmp/edge-media-modals-2\" about:blank)",
+      "Bash(python \"tools/update_media_manifest.py\")",
+      "Bash(python -m py_compile \"tools/update_media_manifest.py\")",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless=new --disable-gpu --remote-debugging-port=9224 --user-data-dir=\"/tmp/edge-manifest-verification\" about:blank)",
+      "Bash(node --check \"E:/My Project/txt to srt/script.js\")"
     ],
     "additionalDirectories": [
       "E:\\My Project\\txt to srt"
