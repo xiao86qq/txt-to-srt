@@ -103,6 +103,37 @@
       </section>
     </aside>
 
+    <div class="media-modal shortcuts-modal" id="shortcuts-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="shortcuts-modal-title">
+      <button class="media-modal__scrim" type="button" data-close="shortcuts" aria-label="关闭快捷键说明"></button>
+      <section class="media-modal__panel shortcuts-modal__panel" tabindex="-1">
+        <header class="modal-header">
+          <div>
+            <p class="modal-kicker">SHORTCUTS</p>
+            <h2 id="shortcuts-modal-title">快捷键说明</h2>
+            <p class="modal-subtitle">用键盘快速控制背景、音乐和界面显示。</p>
+          </div>
+          <button class="modal-close" type="button" data-close="shortcuts" aria-label="关闭快捷键说明">×</button>
+        </header>
+        <div class="shortcuts-grid" aria-label="快捷键列表">
+          <div class="shortcut-item"><kbd>T</kbd><span>隐藏 / 显示主文字卡片</span></div>
+          <div class="shortcut-item"><kbd>H</kbd><span>打开 / 隐藏快捷键说明</span></div>
+          <div class="shortcut-item"><kbd>R</kbd><span>隐藏 / 显示底部控制按钮</span></div>
+          <div class="shortcut-item"><kbd>E</kbd><span>打开 / 隐藏背景选择弹窗</span></div>
+          <div class="shortcut-item"><kbd>K</kbd><span>上一张背景</span></div>
+          <div class="shortcut-item"><kbd>L</kbd><span>下一张背景</span></div>
+          <div class="shortcut-item"><kbd>P</kbd><span>打开 / 隐藏歌曲侧栏</span></div>
+          <div class="shortcut-item"><kbd>N</kbd><span>上一首音乐</span></div>
+          <div class="shortcut-item"><kbd>M</kbd><span>下一首音乐</span></div>
+          <div class="shortcut-item"><kbd>Space</kbd><span>播放 / 暂停音乐</span></div>
+          <div class="shortcut-item"><kbd>←</kbd><span>播放进度后退 5 秒</span></div>
+          <div class="shortcut-item"><kbd>→</kbd><span>播放进度前进 5 秒</span></div>
+          <div class="shortcut-item"><kbd>↑</kbd><span>音量增加 5%</span></div>
+          <div class="shortcut-item"><kbd>↓</kbd><span>音量降低 5%</span></div>
+          <div class="shortcut-item"><kbd>Esc</kbd><span>关闭当前打开的弹窗</span></div>
+        </div>
+      </section>
+    </div>
+
     <input class="visually-hidden" id="background-input" type="file" accept="image/*">
     <input class="visually-hidden" id="music-input" type="file" accept="audio/*">
     <audio id="relax-audio" src="./assets/song/Stay Alive (From The Secret Life of Walter Mitty Soundtrack) - José González.mp3" preload="auto"></audio>

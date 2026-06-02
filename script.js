@@ -19,6 +19,8 @@
   const restoreDefaultBackgroundButton = document.querySelector("#restore-default-background");
   const musicDrawer = document.querySelector("#music-drawer");
   const musicDrawerPanel = musicDrawer?.querySelector(".music-drawer__panel");
+  const shortcutsModal = document.querySelector("#shortcuts-modal");
+  const shortcutsModalPanel = shortcutsModal?.querySelector(".shortcuts-modal__panel");
   const songSearch = document.querySelector("#song-search");
   const songList = document.querySelector("#song-list");
   const nowPlayingTitle = document.querySelector("#now-playing-title");
@@ -92,6 +94,7 @@
   let repeatMode = "one";
   let lastBackgroundTrigger = null;
   let lastMusicTrigger = null;
+  let lastShortcutsTrigger = null;
 
   const storage = {
     get(key) {
@@ -108,7 +111,7 @@
     }
   };
 
-  const isTypingTarget = (target) => target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement || target?.isContentEditable;
+  const isTypingTarget = (target) => (target instanceof HTMLInputElement && target.type !== "range") || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement || target?.isContentEditable;
   const escapeHtml = (value) => String(value).replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" })[char]);
   const resolveUrl = (src) => new URL(src, document.baseURI).href;
   const findBackground = (id) => backgroundLibrary.find((item) => item.id === id) || backgroundLibrary[0];
@@ -151,6 +154,25 @@
 
     audio.currentTime = (Number(audioProgress.value) / 100) * audio.duration;
     syncProgressUI();
+  };
+
+  const seekAudioBy = (seconds) => {
+    if (!audio || !Number.isFinite(audio.duration) || audio.duration <= 0) {
+      return;
+    }
+
+    audio.currentTime = Math.min(audio.duration, Math.max(0, audio.currentTime + seconds));
+    syncProgressUI();
+  };
+
+  const adjustVolumeBy = (delta) => {
+    if (!audio) {
+      return;
+    }
+
+    audio.volume = Math.min(1, Math.max(0, audio.volume + delta));
+    storage.set(STORAGE_KEYS.volume, String(audio.volume));
+    syncMusicUI();
   };
 
   window.addEventListener("load", () => {
@@ -391,6 +413,43 @@
     } else {
       openMusicDrawer();
     }
+  };
+
+  const openShortcutsModal = (trigger = null) => {
+    lastShortcutsTrigger = trigger;
+    shortcutsModal?.classList.add("is-open");
+    shortcutsModal?.setAttribute("aria-hidden", "false");
+    body.classList.add("shortcuts-modal-open");
+    requestAnimationFrame(() => shortcutsModalPanel?.focus());
+  };
+
+  const closeShortcutsModal = () => {
+    shortcutsModal?.classList.remove("is-open");
+    shortcutsModal?.setAttribute("aria-hidden", "true");
+    body.classList.remove("shortcuts-modal-open");
+    lastShortcutsTrigger?.focus?.();
+  };
+
+  const toggleShortcutsModal = () => {
+    if (shortcutsModal?.classList.contains("is-open")) {
+      closeShortcutsModal();
+    } else {
+      openShortcutsModal();
+    }
+  };
+
+  const setTextCardVisible = (visible) => {
+    if (!card) {
+      return;
+    }
+
+    card.classList.toggle("is-dismissed", !visible);
+    card.setAttribute("aria-hidden", String(!visible));
+    card.setAttribute("tabindex", visible ? "0" : "-1");
+  };
+
+  const toggleTextCard = () => {
+    setTextCardVisible(card?.classList.contains("is-dismissed") || card?.getAttribute("aria-hidden") === "true");
   };
 
   const playSelectedSong = () => {
@@ -756,6 +815,10 @@
     if (closeTarget.dataset.close === "music") {
       closeMusicDrawer();
     }
+
+    if (closeTarget.dataset.close === "shortcuts") {
+      closeShortcutsModal();
+    }
   });
 
   switchPanel?.addEventListener("click", (event) => {
@@ -793,7 +856,9 @@
     const typing = isTypingTarget(event.target);
 
     if (key === "escape") {
-      if (backgroundModal?.classList.contains("is-open")) {
+      if (shortcutsModal?.classList.contains("is-open")) {
+        closeShortcutsModal();
+      } else if (backgroundModal?.classList.contains("is-open")) {
         closeBackgroundModal();
       } else if (musicDrawer?.classList.contains("is-open")) {
         closeMusicDrawer();
@@ -811,6 +876,36 @@
 
     if (key === "p") {
       toggleMusicDrawer();
+    }
+
+    if (key === "t") {
+      event.preventDefault();
+      toggleTextCard();
+    }
+
+    if (key === "h") {
+      event.preventDefault();
+      toggleShortcutsModal();
+    }
+
+    if (key === "arrowleft") {
+      event.preventDefault();
+      seekAudioBy(-5);
+    }
+
+    if (key === "arrowright") {
+      event.preventDefault();
+      seekAudioBy(5);
+    }
+
+    if (key === "arrowup") {
+      event.preventDefault();
+      adjustVolumeBy(0.05);
+    }
+
+    if (key === "arrowdown") {
+      event.preventDefault();
+      adjustVolumeBy(-0.05);
     }
 
     if (key === "n") {
